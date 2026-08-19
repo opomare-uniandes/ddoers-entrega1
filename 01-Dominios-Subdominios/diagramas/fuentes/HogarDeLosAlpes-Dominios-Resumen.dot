@@ -1,0 +1,23 @@
+digraph DomainOverview {
+  graph [
+    rankdir=TB,
+    bgcolor="#FFFFFF",
+    pad=0.35,
+    nodesep=0.45,
+    ranksep=0.65,
+    fontname="Helvetica",
+    label="Hogar de los Alpes — Portafolio de dominios",
+    labelloc=t,
+    fontsize=24
+  ];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=13, margin="0.22,0.16"];
+  edge [arrowsize=0.7];
+
+  portfolio [label="Negocio Hogar de los Alpes", fillcolor="#183B56", fontcolor="#FFFFFF", color="#183B56", penwidth=2.2, fontsize=17, width=4.2];
+  domain_0 [label="Servicios para el Hogar\n\nVisión: Conectar hogares y organizaciones aliadas con proveedores\nconfiables para diagnosticar, coordinar y resolver\nnecesidades del hogar de extremo a extremo, con seguridad,\ntrazabilidad y adaptación a cada mercado.\n\n16 subdominios · 5 núcleo · 9 soporte · 2 genéricos", fillcolor="#FFF4C7", color="#9A7320", penwidth=2.0, width=6.4];
+  domain_1 [label="Servicios Financieros para Proveedores\n\nVisión: Impulsar la inclusión y el crecimiento financiero de los\nproveedores mediante una billetera, pagos y crédito\nresponsable sustentado en su historial verificable de\ntrabajos.\n\n5 subdominios · 2 núcleo · 2 soporte · 1 genéricos", fillcolor="#FFF4C7", color="#9A7320", penwidth=2.0, width=6.4];
+  domain_2 [label="Servicios Recurrentes para el Hogar\n\nVisión: Ofrecer a los hogares servicios recurrentes confiables\nmediante suscripciones flexibles que aseguren continuidad,\ncoordinación y calidad con proveedores acreditados.\n\n4 subdominios · 2 núcleo · 2 soporte · 0 genéricos", fillcolor="#FFF4C7", color="#9A7320", penwidth=2.0, width=6.4];
+  portfolio -> domain_0 [color="#52616B", penwidth=1.8];
+  portfolio -> domain_1 [color="#52616B", penwidth=1.8];
+  portfolio -> domain_2 [color="#52616B", penwidth=1.8];
+}

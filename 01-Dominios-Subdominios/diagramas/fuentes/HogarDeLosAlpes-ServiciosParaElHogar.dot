@@ -1,0 +1,25 @@
+digraph DomainDetail {
+  graph [
+    rankdir=TB,
+    bgcolor="#FFFFFF",
+    pad=0.35,
+    nodesep=0.45,
+    ranksep=0.75,
+    splines=ortho,
+    fontname="Helvetica",
+    label="Mapa estratégico de subdominios",
+    labelloc=t,
+    fontsize=22
+  ];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=12, margin="0.24,0.18"];
+  edge [arrowsize=0.65];
+
+  domain [label="Servicios para el Hogar\n\nVisión: Conectar hogares y organizaciones aliadas con\nproveedores confiables para diagnosticar,\ncoordinar y resolver necesidades del hogar de\nextremo a extremo, con seguridad, trazabilidad y\nadaptación a cada mercado.", fillcolor="#183B56", fontcolor="#FFFFFF", color="#183B56", penwidth=2.2, width=4.4];
+  type_CORE_DOMAIN [label="NÚCLEO · 5 SUBDOMINIOS\n\n• Diagnóstico de Necesidades\n• Orquestación de Trabajos\n• Marketplace y Matching\n• Operación B2B2C\n• Acreditación de Proveedores", fillcolor="#FFD5C9", color="#B94125", penwidth=2.0, width=4.1];
+  type_SUPPORTING_DOMAIN [label="SOPORTE · 9 SUBDOMINIOS\n\n• Registro de Proveedores\n• Catálogo de Servicios y Cobertura\n• Cotizaciones y Visitas\n• Evidencias y Auditoría\n• Calidad, Disputas y Garantías\n• Reputación de Proveedores\n• Liquidación de Trabajos\n• Facturación a Partners\n• Localización y Cumplimiento\nRegional", fillcolor="#D7E9FF", color="#2E6FA7", penwidth=2.0, width=4.1];
+  type_GENERIC_SUBDOMAIN [label="GENÉRICO · 2 SUBDOMINIOS\n\n• Autenticación y Autorización\n• Procesamiento de Pagos", fillcolor="#DCEED8", color="#4D7A45", penwidth=2.0, width=4.1];
+  { rank=same; type_CORE_DOMAIN; type_SUPPORTING_DOMAIN; type_GENERIC_SUBDOMAIN; }
+  domain -> type_CORE_DOMAIN [color="#52616B", penwidth=1.8];
+  domain -> type_SUPPORTING_DOMAIN [color="#52616B", penwidth=1.8];
+  domain -> type_GENERIC_SUBDOMAIN [color="#52616B", penwidth=1.8];
+}

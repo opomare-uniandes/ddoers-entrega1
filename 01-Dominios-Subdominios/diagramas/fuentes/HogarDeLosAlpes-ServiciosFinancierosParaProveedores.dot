@@ -1,0 +1,25 @@
+digraph DomainDetail {
+  graph [
+    rankdir=TB,
+    bgcolor="#FFFFFF",
+    pad=0.35,
+    nodesep=0.45,
+    ranksep=0.75,
+    splines=ortho,
+    fontname="Helvetica",
+    label="Mapa estratégico de subdominios",
+    labelloc=t,
+    fontsize=22
+  ];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=12, margin="0.24,0.18"];
+  edge [arrowsize=0.65];
+
+  domain [label="Servicios Financieros para Proveedores\n\nVisión: Impulsar la inclusión y el crecimiento\nfinanciero de los proveedores mediante una\nbilletera, pagos y crédito responsable\nsustentado en su historial verificable de\ntrabajos.", fillcolor="#183B56", fontcolor="#FFFFFF", color="#183B56", penwidth=2.2, width=4.4];
+  type_CORE_DOMAIN [label="NÚCLEO · 2 SUBDOMINIOS\n\n• Scoring Financiero Basado en\nTrabajos\n• Crédito para Proveedores", fillcolor="#FFD5C9", color="#B94125", penwidth=2.0, width=4.1];
+  type_SUPPORTING_DOMAIN [label="SOPORTE · 2 SUBDOMINIOS\n\n• Billetera de Proveedores\n• Movimientos y Desembolsos", fillcolor="#D7E9FF", color="#2E6FA7", penwidth=2.0, width=4.1];
+  type_GENERIC_SUBDOMAIN [label="GENÉRICO · 1 SUBDOMINIO\n\n• Cumplimiento Financiero", fillcolor="#DCEED8", color="#4D7A45", penwidth=2.0, width=4.1];
+  { rank=same; type_CORE_DOMAIN; type_SUPPORTING_DOMAIN; type_GENERIC_SUBDOMAIN; }
+  domain -> type_CORE_DOMAIN [color="#52616B", penwidth=1.8];
+  domain -> type_SUPPORTING_DOMAIN [color="#52616B", penwidth=1.8];
+  domain -> type_GENERIC_SUBDOMAIN [color="#52616B", penwidth=1.8];
+}

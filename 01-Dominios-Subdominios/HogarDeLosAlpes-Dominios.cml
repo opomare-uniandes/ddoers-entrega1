@@ -1,0 +1,144 @@
+/*
+ * Hogar de los Alpes - Dominios y subdominios
+ * Entrega 1: Diseño y arquitectura de dominio
+ *
+ * Este archivo modela capacidades de negocio. No representa todavía
+ * bounded contexts, microservicios ni unidades de despliegue.
+ */
+
+Domain ServiciosParaElHogar {
+  domainVisionStatement = "Conectar hogares y organizaciones aliadas con proveedores confiables para diagnosticar, coordinar y resolver necesidades del hogar de extremo a extremo, con seguridad, trazabilidad y adaptación a cada mercado."
+
+  Subdomain DiagnosticoDeNecesidades {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Convertir la necesidad expresada por el usuario y sus evidencias en una especificación útil del trabajo, y re-diagnosticarla cuando cambie durante la ejecución."
+  }
+
+  Subdomain OrquestacionDeTrabajos {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Coordinar el ciclo de vida de trabajos simples y complejos, sus subtrabajos, dependencias, novedades y compensaciones manteniendo un estado consistente."
+  }
+
+  Subdomain MarketplaceYMatching {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Conectar cada necesidad del marketplace con proveedores acreditados adecuados según servicio, zona, disponibilidad y reputación."
+  }
+
+  Subdomain OperacionB2B2C {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Atender trabajos originados por aseguradoras, bancos y comercios aplicando sus redes, SLA, topes, aprobaciones, auditoría y reglas de sincronización."
+  }
+
+  Subdomain AcreditacionDeProveedores {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Garantizar que cada persona o empresa que atiende un hogar esté verificada y habilitada para los servicios y zonas que demostró, con revalidaciones y homologaciones aplicables."
+  }
+
+  Subdomain RegistroDeProveedores {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Capturar la identidad, naturaleza, técnicos, servicios, credenciales y cobertura declarada por cada proveedor."
+  }
+
+  Subdomain CatalogoDeServiciosYCobertura {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Mantener las categorías, servicios, ciudades y zonas que permiten describir la demanda y las capacidades de los proveedores."
+  }
+
+  Subdomain CotizacionesYVisitas {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Gestionar ofertas, solicitudes de información, visitas previas, selección y re-cotización por cambios de alcance."
+  }
+
+  Subdomain EvidenciasYAuditoria {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Conservar y organizar las evidencias necesarias para diagnosticar, aprobar, seguir, auditar y cerrar los trabajos."
+  }
+
+  Subdomain CalidadDisputasYGarantias {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Resolver novedades de calidad, disputas y garantías y coordinar las acciones correctivas necesarias."
+  }
+
+  Subdomain ReputacionDeProveedores {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Consolidar calificaciones, cumplimiento y garantías para sustentar futuras decisiones de asignación."
+  }
+
+  Subdomain LiquidacionDeTrabajos {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Aplicar las reglas de retención, liberación y distribución de fondos asociadas con la finalización de un trabajo."
+  }
+
+  Subdomain FacturacionAPartners {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Consolidar trabajos y evidencias y facturar a cada partner conforme a su acuerdo comercial."
+  }
+
+  Subdomain LocalizacionYCumplimientoRegional {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Administrar las variaciones de moneda, regulación, huso horario y operación que requiere cada país."
+  }
+
+  Subdomain AutenticacionYAutorizacion {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Autenticar de forma segura a usuarios, proveedores, agentes y partners y autorizar su acceso a las capacidades permitidas mediante mecanismos estándar."
+  }
+
+  Subdomain ProcesamientoDePagos {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Integrar medios y proveedores de pago para autorizar, capturar, devolver y conciliar transacciones."
+  }
+}
+
+Domain ServiciosFinancierosParaProveedores {
+  domainVisionStatement = "Impulsar la inclusión y el crecimiento financiero de los proveedores mediante una billetera, pagos y crédito responsable sustentado en su historial verificable de trabajos."
+
+  Subdomain ScoringFinancieroBasadoEnTrabajos {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Construir un perfil financiero usando el historial de trabajos, cumplimiento, reputación e ingresos observados en Hogar de los Alpes."
+  }
+
+  Subdomain CreditoParaProveedores {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Evaluar, originar y administrar micropréstamos que permitan a los proveedores invertir en el crecimiento de su negocio."
+  }
+
+  Subdomain BilleteraDeProveedores {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Permitir que los proveedores consulten y administren los fondos recibidos o utilizados dentro del ecosistema."
+  }
+
+  Subdomain MovimientosYDesembolsos {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Registrar entradas, salidas, transferencias y desembolsos derivados de trabajos, billetera y crédito."
+  }
+
+  Subdomain CumplimientoFinanciero {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Aplicar controles estandarizados de identidad financiera, riesgo regulatorio y cumplimiento requeridos en cada país."
+  }
+}
+
+Domain ServiciosRecurrentesParaElHogar {
+  domainVisionStatement = "Ofrecer a los hogares servicios recurrentes confiables mediante suscripciones flexibles que aseguren continuidad, coordinación y calidad con proveedores acreditados."
+
+  Subdomain OfertaDeSuscripciones {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Definir planes, servicios incluidos, frecuencia, condiciones y valor de la oferta recurrente para cada hogar."
+  }
+
+  Subdomain PlanificacionDeServiciosRecurrentes {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Convertir una suscripción activa en una secuencia coordinada de atenciones periódicas con continuidad de servicio."
+  }
+
+  Subdomain GestionDelCicloDeSuscripcion {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Administrar la activación, renovación, modificación, pausa y cancelación de las suscripciones."
+  }
+
+  Subdomain FacturacionRecurrente {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Calcular cargos periódicos, ajustes y obligaciones económicas asociados con cada suscripción."
+  }
+}
