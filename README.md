@@ -50,9 +50,9 @@ repositorio no necesita `package.json`, `package-lock.json` ni `npm install`.
 Este proyecto fue desarrollado localmente y **no utilizó Gitpod**. En
 consecuencia, el archivo `.gitpod.yml` no aplica para esta entrega.
 
-## Instrucciones de uso
+## Instrucciones de lectura
 
-### 1. Obtener y abrir el proyecto
+### 1. Para una mejor visualización, clonar nuestro repositorio (Opcional)
 
 ```bash
 git clone https://github.com/opomare-uniandes/ddoers-entrega1.git
@@ -60,28 +60,12 @@ cd ddoers-entrega1
 code .
 ```
 
-### 2. Validar los dominios y subdominios
+### 2. Revisión de los dominios y subdominios
 
-1. Abra
+El archivo a evaluar es
    [`01-Dominios-Subdominios/HogarDeLosAlpes-Dominios.cml`](./01-Dominios-Subdominios/HogarDeLosAlpes-Dominios.cml).
-2. Confirme que Visual Studio Code reconozca el lenguaje **Context Mapper DSL**.
-3. Abra el panel **Problems** y compruebe que no existan errores de sintaxis.
-4. Revise las declaraciones `Domain`, `Subdomain`, `domainVisionStatement` y
-   `type`.
-
-![Evidencia de validación con Context Mapper DSL](./01-Dominios-Subdominios/evidencias/ContextMapper-Validacion-DSL.jpg)
-
-La captura muestra el archivo reconocido como **Context Mapper DSL** y el panel
-**Problems** sin errores ni advertencias.
-
-Para regenerar las vistas estratégicas:
-
-```bash
-node 01-Dominios-Subdominios/generar-diagramas.mjs
-```
-
-El comando lee el CML y actualiza los archivos PNG, SVG y DOT de
-`01-Dominios-Subdominios/diagramas/`.
+2. Una vez abierto, se podrá confirmar que Visual Studio Code reconozca el lenguaje **Context Mapper DSL**.
+3. Dentro de la carpeta del primer punto podrá encontrar los diagramas en imagenes que se generaron con la información del cml
 
 ### 3. Revisar el lenguaje ubicuo
 
@@ -109,7 +93,7 @@ El comando lee el CML y actualiza los archivos PNG, SVG y DOT de
 La siguiente tabla indica dónde encontrar el artefacto o fragmento asociado
 con cada criterio de calificación:
 
-| Ítem evaluable | Archivo o evidencia | Fragmento que debe revisarse |
+| Ítem evaluable | Archivo o evidencia | Fragmento de revisión |
 |---|---|---|
 | Dominios y subdominios | [`HogarDeLosAlpes-Dominios.cml`](./01-Dominios-Subdominios/HogarDeLosAlpes-Dominios.cml) | Declaraciones `Domain` y `Subdomain`: 3 dominios y 25 subdominios. |
 | *Vision statements* | [`HogarDeLosAlpes-Dominios.cml`](./01-Dominios-Subdominios/HogarDeLosAlpes-Dominios.cml) | Propiedad `domainVisionStatement` de cada dominio y subdominio. |
@@ -441,16 +425,3 @@ monolito.
 4. Verificar que los límites, contratos y mecanismos de integración respondan
    a las capacidades y flujos previamente identificados.
 
-## 7. Lista de comprobación para la entrega
-
-Antes de publicar la versión final del repositorio:
-
-- [ ] Confirmar que todos los archivos CML abran sin errores en Context Mapper.
-- [ ] Confirmar que las seis imágenes PNG referenciadas en este README puedan
-      abrirse desde la interfaz del repositorio remoto.
-- [ ] Incluir en el commit la carpeta completa `01-Dominios-Subdominios/`.
-- [ ] Verificar que no se incluyan archivos locales como `.DS_Store`.
-- [ ] Revisar que los enlaces relativos de este README funcionen después del
-      `push`.
-- [ ] Comprobar que el commit entregado contenga los tres componentes:
-      dominios, lenguaje ubicuo y contextos acotados.
