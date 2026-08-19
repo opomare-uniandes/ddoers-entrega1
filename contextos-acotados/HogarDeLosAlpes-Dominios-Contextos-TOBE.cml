@@ -1,0 +1,274 @@
+/*
+ * Hogar de los Alpes — Dominios, subdominios y contextos acotados (TO-BE)
+ * Autor: Víctor Camacho, Osmond Pomare, Fernando Rengifo
+ * Fuente única: Proyecto-202614-HogarDeLosAlpes.pdf
+ * Fecha: agosto 17 de 2026
+ *
+ * Convenciones de relación (notación de Context Mapper):
+ *   U = Upstream   D = Downstream   OHS = Open Host Service
+ *   PL = Published Language   CF = Conformist   ACL = Anticorruption Layer
+ */
+
+/* ============================================================
+ * Dominios y subdominios
+ * ============================================================ */
+
+Domain ServiciosParaElHogar {
+  domainVisionStatement = "Conectar hogares y organizaciones aliadas con proveedores confiables para diagnosticar, coordinar y resolver necesidades del hogar de extremo a extremo, en Colombia y en los nuevos países de la expansión (México, Brasil, Argentina)."
+
+  Subdomain DiagnosticoConversacional {
+    type = CORE_DOMAIN
+    domainVisionStatement = "El asistente conversacional diagnostica el problema y genera la especificación estructurada del trabajo, y lo re-diagnostica cuando su naturaleza cambia durante la ejecución (p. ej. una pared con moho que esconde una tubería rota)."
+  }
+
+  Subdomain OrquestacionDeTrabajos {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Coordinar el ciclo de vida de trabajos simples y complejos: orden de sub-trabajos, paralelismo, bloqueos, y las novedades (re-diagnósticos, cancelaciones) que pueden implicar re-cotizar o re-asignar."
+  }
+
+  Subdomain MarketplaceYAsignacion {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Conectar cada trabajo del marketplace con proveedores acreditados según servicio, zona, disponibilidad y reputación."
+  }
+
+  Subdomain OperacionB2B2C {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Orquestar en tiempo real los trabajos de siniestros e instalaciones de más de 30 partners aplicando su red de proveedores, SLA, montos y aprobaciones, absorbiendo millones de requests diarios de integración."
+  }
+
+  Subdomain GestionComercialDePartners {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Negociar, dar de alta y mantener el acuerdo comercial, las condiciones y el compliance de cada aseguradora, banco o comercio, como capacidad distinta de la ejecución operativa de sus trabajos."
+  }
+
+  Subdomain AcreditacionDeProveedores {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Verificar y habilitar proveedores por servicio y zona, con homologaciones de cada partner y revalidaciones periódicas, optimizando con IA el proceso hoy manual sin sacrificar seguridad."
+  }
+
+  Subdomain CatalogoDeServiciosYCobertura {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Mantener categorías, servicios, ciudades y zonas como lenguaje común entre demanda y oferta."
+  }
+
+  Subdomain PagosYLiquidacion {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Procesar el pago del cliente, retenerlo hasta el cierre del trabajo, liberar los fondos al proveedor y facturar a cada partner B2B2C conforme a su acuerdo comercial."
+  }
+
+  Subdomain CalidadYReputacion {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Resolver disputas de calidad y garantías, y consolidar calificaciones y cumplimiento de cada proveedor para futuras asignaciones."
+  }
+
+  Subdomain LocalizacionYCumplimientoRegional {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Administrar moneda, huso horario, regulación y particularidades operativas propias de cada país durante la expansión a México, Brasil y Argentina."
+  }
+
+  Subdomain IdentidadYAcceso {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Identificar y autorizar de forma segura a usuarios, proveedores, agentes y partners mediante mecanismos estándar."
+  }
+}
+
+Domain ServiciosFinancierosParaProveedores {
+  domainVisionStatement = "Impulsar la inclusión y el crecimiento financiero de los proveedores mediante wallet, pagos y crédito responsable sustentado en su historial verificable de trabajos en Hogar de los Alpes."
+
+  Subdomain ScoringYCreditoParaProveedores {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Construir un perfil financiero a partir del historial de trabajos, cumplimiento y reputación del proveedor, y usarlo para evaluar y originar micropréstamos que financien el crecimiento de su negocio."
+  }
+
+  Subdomain BilleteraYMovimientos {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Permitir que el proveedor consulte y administre los fondos recibidos o utilizados, y registrar las entradas, salidas y desembolsos correspondientes."
+  }
+
+  Subdomain CumplimientoFinanciero {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Aplicar controles estandarizados de identidad financiera, riesgo regulatorio y cumplimiento requeridos en cada país."
+  }
+}
+
+Domain ServiciosRecurrentesParaElHogar {
+  domainVisionStatement = "Ofrecer a los hogares servicios recurrentes del hogar mediante suscripciones flexibles que aseguren continuidad, coordinación y calidad con proveedores acreditados."
+
+  Subdomain SuscripcionesYPlanes {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Definir planes, servicios incluidos, frecuencia y condiciones de la oferta recurrente, y administrar la activación, renovación, pausa y cancelación de cada suscripción."
+  }
+
+  Subdomain PlanificacionDeAtencionesRecurrentes {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Convertir una suscripción activa en una secuencia coordinada de atenciones periódicas, reutilizando la red de proveedores acreditados existente."
+  }
+
+  Subdomain FacturacionRecurrente {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Calcular los cargos periódicos y ajustes asociados a cada suscripción."
+  }
+}
+
+/* ============================================================
+ * Contextos acotados (bounded contexts)
+ * ============================================================ */
+
+BoundedContext ContextoDiagnostico implements DiagnosticoConversacional {
+  type = FEATURE
+  domainVisionStatement = "Asistente conversacional que diagnostica el problema del cliente y produce la especificación estructurada del trabajo."
+  // Equipo: Asistente IA (división Proveedores de Servicio, CTO)
+}
+
+BoundedContext ContextoGestionDeTrabajos implements OrquestacionDeTrabajos {
+  type = FEATURE
+  domainVisionStatement = "Motor único de orquestación del ciclo de vida del trabajo, tanto para marketplace como para B2B2C."
+  // Equipo: Workflows (división Gestión de Trabajos, CTO)
+}
+
+BoundedContext ContextoMarketplace implements MarketplaceYAsignacion, CatalogoDeServiciosYCobertura {
+  type = FEATURE
+  domainVisionStatement = "Publicación y matching de trabajos del marketplace B2C con proveedores acreditados, apoyado en el catálogo de categorías, ciudades y zonas."
+  // Equipo: Publicación y Búsqueda (división Proveedores de Servicio, CTO)
+}
+
+BoundedContext ContextoOperacionB2B2C implements OperacionB2B2C {
+  type = FEATURE
+  domainVisionStatement = "Orquestación operativa en tiempo real de trabajos de siniestros e instalaciones, aplicando las reglas ya negociadas de cada partner."
+  // Equipos: Integraciones B2B2C y Reglas de Partner (división Siniestros, CTO)
+}
+
+BoundedContext ContextoAlianzasB2B2C implements GestionComercialDePartners {
+  type = FEATURE
+  domainVisionStatement = "Relación comercial con aseguradoras, bancos y comercios: negociación, alta y mantenimiento de acuerdos, SLA y condiciones que luego ejecuta Operación B2B2C."
+  // División: Alianzas B2B2C (CRO)
+}
+
+BoundedContext ContextoAcreditacionDeProveedores implements AcreditacionDeProveedores {
+  type = FEATURE
+  domainVisionStatement = "Verificación y habilitación de proveedores por servicio y zona, con homologaciones por partner y revalidaciones periódicas."
+  // Equipos: Registro y Acreditación (división Proveedores de Servicio, CTO)
+}
+
+BoundedContext ContextoPagosYLiquidacion implements PagosYLiquidacion {
+  type = FEATURE
+  domainVisionStatement = "Cobro al cliente, retención, liberación de fondos al proveedor y facturación a cada partner B2B2C."
+  // Equipo: Pagos (división Finanzas y Tesorería, CFO)
+}
+
+BoundedContext ContextoCalidadYReputacion implements CalidadYReputacion {
+  type = FEATURE
+  domainVisionStatement = "Resolución de disputas de calidad y garantías, y consolidación de la reputación de cada proveedor para futuras asignaciones."
+  // División: Calidad y disputas (COO)
+}
+
+BoundedContext ContextoExpansionRegional implements LocalizacionYCumplimientoRegional {
+  type = FEATURE
+  domainVisionStatement = "Moneda, huso horario, regulación y particularidades operativas de cada país, consumidas por los demás contextos durante la expansión."
+  // División: Expansión regional (CRO)
+}
+
+BoundedContext ContextoFintech implements ScoringYCreditoParaProveedores, BilleteraYMovimientos, CumplimientoFinanciero {
+  type = FEATURE
+  domainVisionStatement = "Scoring, crédito, billetera y cumplimiento financiero para proveedores, sustentados en su historial de trabajos en HdA."
+  // Divisiones: Fintech, Finanzas y Tesorería (Wallet y préstamos), Riesgo y cumplimiento (CFO) — ver nota de ajustes no aplicados
+}
+
+BoundedContext ContextoSuscripciones implements SuscripcionesYPlanes, PlanificacionDeAtencionesRecurrentes, FacturacionRecurrente {
+  type = FEATURE
+  domainVisionStatement = "Oferta y ciclo de vida de las suscripciones del hogar, planificación de sus atenciones periódicas y facturación recurrente."
+  // Línea de negocio futura, sin equipo explícito en el organigrama
+}
+
+/* --- Sistemas externos con los que HdA se integra --- */
+
+BoundedContext SistemasDeVerificacionExternos {
+  type = SYSTEM
+  domainVisionStatement = "Sistemas de policía, registros mercantiles y entidades certificadoras consultados durante la verificación de proveedores."
+}
+
+BoundedContext SistemasPasarelaDePagosExterna {
+  type = SYSTEM
+  domainVisionStatement = "Proveedor externo de procesamiento de pagos para autorizar, capturar y conciliar transacciones."
+}
+
+BoundedContext SistemasDePartnersExternos {
+  type = SYSTEM
+  domainVisionStatement = "Sistemas propios de cada aseguradora, banco o comercio (+30 partners) con los que HdA se integra."
+}
+
+/* ============================================================
+ * Mapa de contextos (TO-BE)
+ * ============================================================ */
+
+ContextMap ContextMapTOBE {
+  state = TO_BE
+  type = SYSTEM_LANDSCAPE
+
+  contains ContextoDiagnostico
+  contains ContextoGestionDeTrabajos
+  contains ContextoMarketplace
+  contains ContextoOperacionB2B2C
+  contains ContextoAlianzasB2B2C
+  contains ContextoAcreditacionDeProveedores
+  contains ContextoPagosYLiquidacion
+  contains ContextoCalidadYReputacion
+  contains ContextoExpansionRegional
+  contains ContextoFintech
+  contains ContextoSuscripciones
+  contains SistemasDeVerificacionExternos
+  contains SistemasPasarelaDePagosExterna
+  contains SistemasDePartnersExternos
+
+  /* El diagnóstico entrega la especificación del trabajo a la orquestación. */
+  ContextoGestionDeTrabajos [D,CF]<-[U,OHS,PL] ContextoDiagnostico
+
+  /* Marketplace publica y hace matching sobre los trabajos que orquesta Gestión de Trabajos. */
+  ContextoMarketplace [D,CF]<-[U,OHS,PL] ContextoGestionDeTrabajos
+
+  /* GestionDeTrabajos es el ÚNICO dueño/escritor del Aggregate Trabajo */
+  ContextoOperacionB2B2C [D,CF]<-[U,OHS,PL] ContextoGestionDeTrabajos
+
+  /* Alianzas B2B2C negocia el contrato; Operación B2B2C lo ejecuta en tiempo real */
+  ContextoOperacionB2B2C [D,CF]<-[U,OHS,PL] ContextoAlianzasB2B2C
+  ContextoPagosYLiquidacion [D,CF]<-[U,OHS,PL] ContextoAlianzasB2B2C
+
+  /* Marketplace y Operación B2B2C sólo asignan proveedores ya acreditados;
+   * B2B2C además exige que cumplan la homologación de cada partner, por
+   * eso se protege con una capa de anticorrupción. */
+  ContextoMarketplace [D,CF]<-[U,OHS,PL] ContextoAcreditacionDeProveedores
+  ContextoOperacionB2B2C [D,ACL]<-[U,OHS] ContextoAcreditacionDeProveedores
+
+  /* El cierre de un trabajo dispara el cobro/liquidación correspondiente. */
+  ContextoPagosYLiquidacion [D,CF]<-[U,OHS] ContextoGestionDeTrabajos
+  ContextoPagosYLiquidacion [D,ACL]<-[U,OHS] SistemasPasarelaDePagosExterna
+
+  /* Calidad y reputación observa el estado del trabajo para resolver
+   * disputas, y alimenta con reputación tanto al matching como al scoring. */
+  ContextoCalidadYReputacion [D,ACL]<-[U,OHS] ContextoGestionDeTrabajos
+  ContextoMarketplace [D,CF]<-[U,OHS,PL] ContextoCalidadYReputacion
+  ContextoFintech [D,CF]<-[U,OHS,PL] ContextoCalidadYReputacion
+
+  /* Localización/expansión regional es consumida por los contextos que
+   * varían por país, sin imponerles su propio modelo interno. */
+  ContextoOperacionB2B2C [D,CF]<-[U,OHS,PL] ContextoExpansionRegional
+  ContextoPagosYLiquidacion [D,CF]<-[U,OHS,PL] ContextoExpansionRegional
+
+  /* Fintech usa el historial de trabajos y la verificación del proveedor
+   * como fuente de su scoring, sin imponerle su modelo a Gestión de
+   * Trabajos ni a Acreditación (Conformist en el sentido de la fuente). */
+  ContextoFintech [D,CF]<-[U,OHS,PL] ContextoGestionDeTrabajos
+  ContextoFintech [D,CF]<-[U,OHS,PL] ContextoAcreditacionDeProveedores
+
+  /* Suscripciones reutiliza el motor de orquestación y la red de
+   * proveedores acreditados existentes en lugar de duplicarlos. */
+  ContextoSuscripciones [D,CF]<-[U,OHS,PL] ContextoGestionDeTrabajos
+  ContextoSuscripciones [D,CF]<-[U,OHS,PL] ContextoMarketplace
+
+  /* Operación B2B2C no habla directamente con cada partner: lo hace a
+   * través de una capa de anticorrupción que absorbe sus contratos dispares. */
+  ContextoOperacionB2B2C [D,ACL]<-[U,OHS] SistemasDePartnersExternos
+
+  /* La verificación de proveedores consulta fuentes externas que HdA no controla. */
+  ContextoAcreditacionDeProveedores [D,ACL]<-[U,OHS] SistemasDeVerificacionExternos
+}

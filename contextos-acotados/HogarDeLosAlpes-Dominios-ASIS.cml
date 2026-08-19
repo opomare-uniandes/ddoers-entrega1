@@ -1,0 +1,125 @@
+/*
+ * Hogar de los Alpes — Dominios, subdominios y contextos acotados (TO-BE)
+ * Autor: Víctor Camacho, Osmond Pomare, Fernando Rengifo
+ * Fuente única: Proyecto-202614-HogarDeLosAlpes.pdf
+ * Fecha: agosto 17 de 2026
+ *
+ * Convenciones de relación (notación de Context Mapper):
+ *   U = Upstream   D = Downstream   OHS = Open Host Service
+ *   PL = Published Language   CF = Conformist   ACL = Anticorruption Layer
+ *   SK = Shared Kernel (simétrica)
+ */
+
+Domain ServiciosParaElHogar {
+  domainVisionStatement = "Conectar hogares que necesitan resolver un problema con profesionales verificados y calificados (plomeros, electricistas, carpinteros, pintores, entre otros), atendiendo tanto trabajos que llegan directamente de los hogares (marketplace) como los que originan aseguradoras, bancos y comercios (B2B2C)."
+
+  Subdomain DiagnosticoConversacional {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Un asistente conversacional inteligente guía al usuario en la creación del trabajo del marketplace: diagnostica el problema, la categoría y la urgencia por medio de un chat."
+  }
+
+  Subdomain OrquestacionDeTrabajos {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Coordinar el ciclo de vida de un trabajo, simple o compuesto por sub-trabajos de categorías distintas: el orden, las actividades en paralelo, los bloqueos, y las novedades frecuentes (re-diagnósticos, cancelaciones, proveedores que no se presentan, disputas de calidad)."
+  }
+
+  Subdomain MarketplaceB2C {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Publicar el trabajo a proveedores acreditados que coinciden en categoría, zona y disponibilidad; permitir que el cliente compare cotizaciones, agende visitas, pague dentro de la plataforma y califique el servicio recibido."
+  }
+
+  Subdomain OperacionB2B2CSiniestros {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Atender los trabajos de siniestros e instalaciones que crean las aseguradoras, bancos y comercios mediante integraciones puntuales, aplicando la red de proveedores permitida, los SLA, montos, aprobaciones y auditoría propios de cada partner."
+  }
+
+  Subdomain AcreditacionDeProveedores {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Verificar y habilitar, por servicio y zona, a cada proveedor (persona natural o empresa) mediante antecedentes judiciales, títulos, certificados y registro mercantil. Hoy lo ejecuta un equipo de agentes de HdA accediendo manualmente a múltiples sistemas externos (policía, registros empresariales, entidades certificadoras)."
+  }
+
+  Subdomain CatalogoDeServiciosYCobertura {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Mantener las categorías de servicio (plomería, electricidad, carpintería, pintura, baldosería, entre otras) y la cobertura geográfica (ciudad y zona) que declara cada proveedor al registrarse."
+  }
+
+  Subdomain CotizacionesYVisitas {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Gestionar la información adicional y las visitas al predio que un proveedor requiere para cotizar, y la re-cotización cuando cambia el alcance de un trabajo."
+  }
+
+  Subdomain PagosYFacturacion {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Procesar el pago del cliente del marketplace, retenido hasta finalizar el trabajo, y facturar a cada partner B2B2C conforme a su acuerdo comercial."
+  }
+}
+
+Domain ServiciosFinancierosParaProveedores {
+  domainVisionStatement = "Línea de negocio fintech anunciada tras la adquisición por Seguros de los Alpes para ofrecer wallet, pagos y micro-préstamos a proveedores usando su historial de trabajos como fuente de scoring crediticio."
+
+  /* Sin subdominios: el PDF presenta este dominio únicamente como visión de
+   * negocio ('se busca profundizar el negocio fintech para proveedores');
+   * ninguna capacidad de scoring, crédito o billetera opera hoy. */
+}
+
+Domain ServiciosRecurrentesParaElHogar {
+  domainVisionStatement = "Línea de negocio anunciada para ofrecer a los hogares servicios recurrentes (empleadas domésticas, limpieza, jardinería) bajo un modelo de suscripción."
+
+  /* Sin subdominios: el PDF presenta este dominio únicamente como visión de
+   * expansión de negocio ('se quiere entrar a servicios recurrentes del
+   * hogar... bajo un modelo de suscripción'); ninguna capacidad de
+   * suscripción opera hoy. */
+}
+
+/* ============================================================
+ * Contexto acotado (AS-IS)
+ * ============================================================
+ * Hoy no hay bounded contexts independientes: toda la operación de
+ * "Servicios para el Hogar" corre sobre un único monolito construido desde
+ * 2016, que impide que Proveedores de Servicio, Marketplace, Siniestros y
+ * Gestión de Trabajos evolucionen de forma independiente (despliegues de
+ * 3-4 horas, semanas de QA, equipos bloqueados entre sí).
+ */
+
+BoundedContext MonolitoHogarDeLosAlpes implements ServiciosParaElHogar {
+  type = SYSTEM
+  domainVisionStatement = "Aplicación monolítica que concentra diagnóstico, orquestación de trabajos, marketplace, operación B2B2C, acreditación de proveedores, catálogo, cotizaciones y pagos/facturación."
+}
+
+/* --- Sistemas externos con los que hoy se integra el monolito --- */
+
+BoundedContext SistemasDeVerificacionExternos {
+  type = SYSTEM
+  domainVisionStatement = "Sistemas de policía, registros mercantiles y entidades certificadoras consultados manualmente por agentes de HdA durante la verificación de proveedores."
+}
+
+BoundedContext SistemasPasarelaDePagosExterna {
+  type = SYSTEM
+  domainVisionStatement = "Proveedor externo de procesamiento de pagos usado por el monolito para autorizar, capturar y conciliar transacciones."
+}
+
+BoundedContext SistemasDePartnersExternos {
+  type = SYSTEM
+  domainVisionStatement = "Sistemas propios de cada aseguradora, banco o comercio (+30 partners activos) con reglas, pasos y compliance distintos, integrados hoy de forma particular para cada uno."
+}
+
+ContextMap ContextMapASIS {
+  state = AS_IS
+  type = SYSTEM_LANDSCAPE
+
+  contains MonolitoHogarDeLosAlpes
+  contains SistemasDeVerificacionExternos
+  contains SistemasPasarelaDePagosExterna
+  contains SistemasDePartnersExternos
+
+  /* Verificación ejecutada manualmente por agentes: no hay una capa de
+   * anticorrupción real, sino consultas puntuales a cada sistema externo. */
+  MonolitoHogarDeLosAlpes [D,ACL]<-[U,OHS] SistemasDeVerificacionExternos
+
+  MonolitoHogarDeLosAlpes [D,ACL]<-[U,OHS] SistemasPasarelaDePagosExterna
+
+  /* Cada partner impone su propio contrato: el monolito termina
+   * conformándose a más de 30 modelos distintos sin traducción común, una
+   * de las causas de la rigidez actual. */
+  MonolitoHogarDeLosAlpes [D,CF]<-[U] SistemasDePartnersExternos
+}
